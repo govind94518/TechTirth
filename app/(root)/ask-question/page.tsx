@@ -17,6 +17,7 @@ const Page =  async () => {
 
     const mongoUser = await getUserById({userId})
     console.log("mongo user::",mongoUser);
+    if (!mongoUser) return redirect("/login");
 
     return (
         <div className="">
