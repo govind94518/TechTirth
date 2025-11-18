@@ -1,5 +1,3 @@
-import {Schema} from "mongoose";
-import {IUser} from "@/database/user.model";
 
 export interface GetQuestionParams{
     page?:number;
