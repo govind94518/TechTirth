@@ -1,9 +1,9 @@
-// app/api/webhooks/clerk/route.ts
 import { Webhook } from "svix";
 import { headers } from "next/headers";
 import type { WebhookEvent } from "@clerk/nextjs/server";
 import {createUser, updateUser} from "@/lib/actions/user.action";
 import {NextResponse} from "next/server";
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
     const body = await req.text();
