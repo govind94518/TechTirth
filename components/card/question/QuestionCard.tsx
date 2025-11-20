@@ -50,7 +50,7 @@ const QuestionCard = ({question}: QuestionCardProps) => {
             <div className="mt-5 flex flex-row gap-5 flex-between ">
 
                 <Metric
-                    iconSrc='/assets/icons/avatar.svg'
+                    iconSrc={question?.picture ||'/assets/icons/avatar.svg'}
                     alt='name'
                     value={question.author?.["name"]}
                     title={""}
