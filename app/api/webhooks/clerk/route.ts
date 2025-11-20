@@ -47,6 +47,8 @@ export async function POST(req: Request) {
                 first_name,
                 // eslint-disable-next-line camelcase
                 last_name,
+                // eslint-disable-next-line camelcase
+                image_url
             } = data;
 
             // eslint-disable-next-line camelcase
@@ -61,6 +63,8 @@ export async function POST(req: Request) {
                 name: fullName,
                 username: email,
                 email: email,
+                // eslint-disable-next-line camelcase
+                picture:image_url
             });
             return NextResponse.json({message:"OK", status: 201,user: mongoUser});
 
@@ -77,6 +81,8 @@ export async function POST(req: Request) {
                 first_name,
                 // eslint-disable-next-line camelcase
                 last_name,
+                // eslint-disable-next-line camelcase
+                image_url
             } = data;
 
             // eslint-disable-next-line camelcase
@@ -92,6 +98,8 @@ export async function POST(req: Request) {
                     name: fullName,
                     username: email,
                     email: email,
+                    // eslint-disable-next-line camelcase
+                    picture:image_url
                 },
                 path:`/profile/${id}`
             });

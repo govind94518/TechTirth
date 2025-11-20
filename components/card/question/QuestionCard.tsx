@@ -17,6 +17,7 @@ interface Question {
     views: number;
     answer: number;
     createdAt: Date;
+    picture?: string;
 }
 
 interface QuestionCardProps {
