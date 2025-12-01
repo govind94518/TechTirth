@@ -16,7 +16,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
-import questionSchema from "@/lib/validations";
+import {questionSchema} from "@/lib/validations";
 import React from "react";
 import Image from "next/image";
 import {createQuestion} from "@/lib/actions/question.action";
