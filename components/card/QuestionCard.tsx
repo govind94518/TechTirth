@@ -3,6 +3,9 @@ import React from "react";
 import Tag from "@/components/shared/Tag";
 import Metric from "@/components/shared/Metric";
 import {getTimestamp} from "@/lib/utils";
+import {redirect} from "next/navigation";
+import {getUserById, getUserByUserId} from "@/lib/actions/user.action";
+import {auth} from "@clerk/nextjs/server";
 
 
 interface Question {
@@ -25,7 +28,12 @@ interface QuestionCardProps {
 }
 
 
-const QuestionCard = ({question}: QuestionCardProps) => {
+const QuestionCard = async({question}: QuestionCardProps) => {
+    const author = await getUserByUserId({userId:question.author})
+    if (!author) return redirect("/sign-in");
+    console.log("Author: ", author);
+
+
     return (
         <div className="card-wrapper  rounded-[10px] p-9 sm:px-11 gap-5">
 
@@ -50,9 +58,9 @@ const QuestionCard = ({question}: QuestionCardProps) => {
             <div className="mt-5 flex flex-row gap-5 flex-between ">
 
                 <Metric
-                    iconSrc={question?.picture ||'/assets/icons/avatar.svg'}
+                    iconSrc={author?.picture ||'/assets/icons/avatar.svg'}
                     alt='name'
-                    value={question.author?.["name"]}
+                    value={author.name||""}
                     title={""}
                     textStyle="small-medium  text-light-400 dark:text-light-500 "
                     href={`/question/${question._id}`}
@@ -65,6 +73,8 @@ const QuestionCard = ({question}: QuestionCardProps) => {
                         alt='upvote'
                         value={question.upVotes}
                         title={"Votes"}
+                        height={16}
+                        width={16}
                         textStyle="small-medium  text-light-400 dark:text-light-500"
                     />
                     <Metric

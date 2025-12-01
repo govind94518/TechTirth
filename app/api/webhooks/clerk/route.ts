@@ -33,8 +33,8 @@ export async function POST(req: Request) {
 
     const { type, data } = evt;
 
-    console.log("🔔 Event:", type);
-    console.log("📦 Data:", data);
+    // console.log("🔔 Event:", type);
+    // console.log("📦 Data:", data);
 
     switch (type) {
         case "user.created": {
@@ -56,7 +56,7 @@ export async function POST(req: Request) {
             // eslint-disable-next-line camelcase
             const fullName = `${first_name ?? ""} ${last_name ?? ""}`.trim();
 
-            console.log("New User:", id, email);
+            // console.log("New User:", id, email);
 
             const  mongoUser = await  createUser({
                 clerkId: id,
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
         }
 
         case "user.updated": {
-            console.log("User updated:", data.id);
+            // console.log("User updated:", data.id);
             const {
                 id,
                 // eslint-disable-next-line camelcase
@@ -90,7 +90,7 @@ export async function POST(req: Request) {
             // eslint-disable-next-line camelcase
             const fullName = `${first_name ?? ""} ${last_name ?? ""}`.trim();
 
-            console.log("New User:", id, email);
+            // console.log("New User:", id, email);
 
             const  mongoUser = await   updateUser({
                 clerkId: id,

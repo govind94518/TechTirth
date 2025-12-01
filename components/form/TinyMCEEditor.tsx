@@ -9,7 +9,7 @@ export default function TinyMCEEditor() {
 
     const handleSave = () => {
         alert('Content saved!\n\nIn a real application, this would save to your backend.');
-        console.log('Saved content:', content);
+        // console.log('Saved content:', content);
     };
 
     const handleDownload = () => {

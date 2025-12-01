@@ -31,6 +31,22 @@ const nextConfig = {
     // ────────────────────────────────
     swcMinify: true,
     poweredByHeader: false,
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "img.clerk.com",
+            },
+            {
+                protocol: "https",
+                hostname: "images.clerk.dev",
+            },
+            {
+                protocol: "https",
+                hostname: "img.clerk.dev",
+            }
+        ],
+    },
 };
 
 export default nextConfig;

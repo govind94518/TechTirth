@@ -1,27 +1,20 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import React from "react";
+import {Button} from "@/components/ui/button";
 import LocalSearchBar from "@/components/shared/search/LocalSearchBar";
-import { HomePageFilters } from "@/constants/filters";
 import Filter from "@/components/shared/Filter";
-import HomeFilters from "@/components/home/HomeFilters";
+import { UserFilters} from "@/constants/filters";
+import React from "react";
+import {getAllUserParams} from "@/lib/actions/user.action";
 import NoResult from "@/components/shared/NoResult";
-import QuestionCard from "@/components/card/QuestionCard";
-import { getQuestions } from "@/lib/actions/question.action";
-import {auth} from "@clerk/nextjs/server";
+import UserCard from "@/components/card/UserCard";
 
-export default async function HomePage() {
-    // Fetch questions safely and add fallback to prevent undefined access
-    const result = (await getQuestions({})) || { questions: [] };
-    const { userId } = await auth();
-
-    console.log("result::", result);
-
+const page = async () => {
+    const  result = await getAllUserParams({})|| { users: [] }
     return (
         <>
             <div className="flex w-full flex-col-reverse sm:flex-row justify-between sm:items-center gap-4">
                 <h1 className="h1-bold text-dark100_light900 whitespace-nowrap sm:text-left max-sm:justify-start">
-                    All Questions
+                   All Users
                 </h1>
 
                 <Link
@@ -39,23 +32,21 @@ export default async function HomePage() {
                     route="/ask-question"
                     iconPosition="left"
                     imgSrc="/assets/icons/search.svg"
-                    placeholder="Search for a Questions"
+                    placeholder="Search for amazing minds"
                     otherClasses="flex-1"
                 />
 
                 <Filter
-                    filters={HomePageFilters}
+                    filters={UserFilters}
                     otherClasses="min-h-[56px] sm:min-w-[170px]"
-                    containerClasses="hidden max-md:flex"
                 />
             </div>
-
-            <HomeFilters filters={HomePageFilters} />
-
-            <div className="mt-9 py-2.5">
-                {result.questions.length > 0 ? (
-                    result.questions.map((question: any) => (
-                        <QuestionCard key={question._id} question={question} />
+            <section className={` mt-12 flex flex-wrap gap-4 ` }>
+                {result.users.length > 0 ? (
+                    result.users.map((user: any) => (
+                       <div className={'dark:'} key={user._id}>
+                           <UserCard key={user._id} user={user} />
+                       </div>
                     ))
                 ) : (
                     <NoResult
@@ -65,7 +56,8 @@ export default async function HomePage() {
                         linkTitle="Ask a Question"
                     />
                 )}
-            </div>
+            </section>
         </>
-    );
+    )
 }
+export default page;

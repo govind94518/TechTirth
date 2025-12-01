@@ -11,6 +11,8 @@ interface MetricProps {
     isAuthor?: boolean;
     href?: string;
     createdAt?: Date;
+    height?: number ;
+    width?: number  ;
 }
 
 const Metric = ({
@@ -21,16 +23,21 @@ const Metric = ({
                     textStyle,
                     createdAt,
                     href,
+    height,
+    width,
                 }: MetricProps) => {
     const metricContent = (
         <div className={`flex-center flex-wrap gap-1 ${textStyle || ""}`}>
-            <Image
-                src={iconSrc}
-                width={16}
-                height={16}
-                alt={alt || "icon"}
-                className={`object-contain ${href ? "rounded-full" : ""}`}
-            />
+            <div className="w-4 h-4 rounded-full overflow-hidden">
+                <Image
+                    src={iconSrc}
+                    width={16}
+                    height={16}
+                    alt={alt || "icon"}
+                    className="object-cover"
+                />
+            </div>
+
 
             <span>{value}</span>
 
